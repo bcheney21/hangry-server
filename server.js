@@ -1,11 +1,15 @@
 // Required Modules
 require('dotenv').config()
+require('dotenv')
 require('./models') // Connect to MongoDB
 const express = require('express')
 const rowdy = require('rowdy-logger')
 const morgan = require('morgan')
 const cors = require('cors')
 const passport = require('passport')
+
+const Documenu = require('documenu')
+Documenu.configure('API_KEY')
 
 // Variables
 const app = express()
@@ -27,6 +31,15 @@ app.use('/exampleResource', require('./controllers/exampleResource'))
 // Routes
 app.get('/', (req, res) => {
     res.json({ msg: 'Hello world!' })
+})
+
+app.get('/restaurants', async (req, res) => {
+    try {
+        let response = await Documenu.Restaurants.getByZipCode('93103') 
+        res.render('index', { restaurants: response.data })
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // Listen!
