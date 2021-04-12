@@ -7,9 +7,9 @@ const rowdy = require('rowdy-logger')
 const morgan = require('morgan')
 const cors = require('cors')
 const passport = require('passport')
-
+const API_KEY = process.env.API_KEY
 const Documenu = require('documenu')
-Documenu.configure('API_KEY')
+Documenu.configure(API_KEY)
 
 // Variables
 const app = express()
@@ -36,7 +36,8 @@ app.get('/', (req, res) => {
 app.get('/restaurants', async (req, res) => {
     try {
         let response = await Documenu.Restaurants.getByZipCode('93103') 
-        res.render('index', { restaurants: response.data })
+        res.json({ restaurants: response.data })
+        console.log(`restaurants: ${response.data}`)
     } catch (error) {
         console.log(error)
     }
