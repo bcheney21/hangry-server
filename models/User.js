@@ -23,6 +23,9 @@ const UserSchema = new mongoose.Schema({
     photos: [{
         value: String
     }],
+    fav_restaurants_id: {
+        type: Array,
+    }
 }, {
     timestamps: true
 })

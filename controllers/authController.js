@@ -60,5 +60,7 @@ router.get('/github/callback',
 
         res.redirect(`${process.env.CLIENT_URL}/saveToken?token=${token}`);
     });
-
+route.post{'/:userId/favorites', async(req, res)=>{
+    
+}}
 module.exports = router
