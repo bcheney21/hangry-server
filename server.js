@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
     res.json({ msg: 'Hello world!' })
 })
 
-app.get('/restaurants', async (req, res) => {
+app.get('/restaurants/:zipcode', async (req, res) => {
     try {
-        let response = await Documenu.Restaurants.getByZipCode('93103') 
+        let response = await Documenu.Restaurants.getByZipCode(req.params.zipcode) 
         res.json({ restaurants: response.data })
         console.log(`restaurants: ${response.data}`)
     } catch (error) {
