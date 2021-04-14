@@ -60,7 +60,29 @@ router.get('/github/callback',
 
         res.redirect(`${process.env.CLIENT_URL}/saveToken?token=${token}`);
     });
-route.post{'/:userId/favorites', async(req, res)=>{
     
-}}
+    router.post("/:userId/favorites", async (req, res) => {
+        try {
+          const fav_restaurants_id = new fav_restaurants_id({
+            fav_restaurants_id: req.body.id,
+          });
+          const findUser = await User.findById(req.params.userId);
+          console.log(findUser);
+          findUser.fav_restaurants_id.push(fav_restaurants_id);
+          await findUser.save(User);
+          res.json({ msg: "Found User" });
+        } catch (error) {
+          console.log(error);
+        }
+      });
+
+      router.get("/:userId/favorites", async (req, res) => {
+        try {
+          const findUser = await User.findById(req.params.userId);
+          console.log(findUser.fav_restaurants_id);
+          res.json(findUser.fav_restaurants_id);
+        } catch (error) {
+          console.log(error);
+        }
+      });
 module.exports = router
