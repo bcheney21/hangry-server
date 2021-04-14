@@ -23,9 +23,10 @@ const UserSchema = new mongoose.Schema({
     photos: [{
         value: String
     }],
-    fav_restaurants_id: {
-        type: Array,
-    }
+    favRestaurants: [{
+        id: String,
+        name: String
+    }]
 }, {
     timestamps: true
 })
