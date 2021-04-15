@@ -14,6 +14,10 @@ router.post("/:userid/:favorite", async (req, res) => {
     foundUser.favRestaurants.push({name: restaurant})
     const updatedUser = foundUser.save()
     res.status(200).json({updatedUser})
-    // const addedRestaurant = await 
+})
+
+router.get("/:userid/favorites", async (req, res) => {
+    const foundUser = await User.findById(req.params.userid)
+    res.json(foundUser.favRestaurants)
 })
 module.exports = router
