@@ -24,7 +24,6 @@ const UserSchema = new mongoose.Schema({
         value: String
     }],
     favRestaurants: [{
-        // id: String,
         name: String
     }]
 }, {
